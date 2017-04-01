@@ -2,7 +2,7 @@ package utils
 
 import "testing"
 
-func TestListModelFiles(t *testing.T) {
+func TestListFilesByExt(t *testing.T) {
 	type test struct {
 		input    []string
 		expected []string
