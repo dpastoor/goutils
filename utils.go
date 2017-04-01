@@ -2,7 +2,7 @@
 // https://github.com/spf13/hugo/blob/master/helpers/path.go
 // as of commit https://github.com/spf13/hugo/commit/65e5959bad36a6faa7ff8b9c1b21a2b99c4dacad
 
-package utils
+package goutils
 
 import (
 	"errors"
