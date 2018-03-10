@@ -165,32 +165,32 @@ func lstatIfOs(fs afero.Fs, path string) (info os.FileInfo, err error) {
 
 // SafeWriteToDisk is the same as WriteToDisk
 // but it also checks to see if file/directory already exists.
-func SafeWriteToDisk(inpath string, r io.Reader, fs afero.Fs) (err error) {
+func SafeWriteToDisk(fs afero.Fs, inpath string, r io.Reader) (err error) {
 	return afero.SafeWriteReader(fs, inpath, r)
 }
 
 // WriteToDisk writes content to disk.
-func WriteToDisk(inpath string, r io.Reader, fs afero.Fs) (err error) {
+func WriteToDisk(fs afero.Fs, inpath string, r io.Reader) (err error) {
 	return afero.WriteReader(fs, inpath, r)
 }
 
 // GetTempDir returns a temporary directory with the given sub path.
-func GetTempDir(subPath string, fs afero.Fs) string {
+func GetTempDir(fs afero.Fs, subPath string) string {
 	return afero.GetTempDir(fs, subPath)
 }
 
 // DirExists checks if a path exists and is a directory.
-func DirExists(path string, fs afero.Fs) (bool, error) {
+func DirExists(fs afero.Fs, path string) (bool, error) {
 	return afero.DirExists(fs, path)
 }
 
 // IsDir checks if a given path is a directory.
-func IsDir(path string, fs afero.Fs) (bool, error) {
+func IsDir(fs afero.Fs, path string) (bool, error) {
 	return afero.IsDir(fs, path)
 }
 
 // IsEmpty checks if a given path is empty.
-func IsEmpty(path string, fs afero.Fs) (bool, error) {
+func IsEmpty(fs afero.Fs, path string) (bool, error) {
 	return afero.IsEmpty(fs, path)
 }
 
