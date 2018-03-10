@@ -7,6 +7,7 @@ package goutils
 import (
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -162,6 +163,52 @@ func lstatIfOs(fs afero.Fs, path string) (info os.FileInfo, err error) {
 	return
 }
 
+// SafeWriteToDisk is the same as WriteToDisk
+// but it also checks to see if file/directory already exists.
+func SafeWriteToDisk(inpath string, r io.Reader, fs afero.Fs) (err error) {
+	return afero.SafeWriteReader(fs, inpath, r)
+}
+
+// WriteToDisk writes content to disk.
+func WriteToDisk(inpath string, r io.Reader, fs afero.Fs) (err error) {
+	return afero.WriteReader(fs, inpath, r)
+}
+
+// GetTempDir returns a temporary directory with the given sub path.
+func GetTempDir(subPath string, fs afero.Fs) string {
+	return afero.GetTempDir(fs, subPath)
+}
+
+// DirExists checks if a path exists and is a directory.
+func DirExists(path string, fs afero.Fs) (bool, error) {
+	return afero.DirExists(fs, path)
+}
+
+// IsDir checks if a given path is a directory.
+func IsDir(path string, fs afero.Fs) (bool, error) {
+	return afero.IsDir(fs, path)
+}
+
+// IsEmpty checks if a given path is empty.
+func IsEmpty(path string, fs afero.Fs) (bool, error) {
+	return afero.IsEmpty(fs, path)
+}
+
+// FileContains checks if a file contains a specified string.
+func FileContains(filename string, subslice []byte, fs afero.Fs) (bool, error) {
+	return afero.FileContainsBytes(fs, filename, subslice)
+}
+
+// FileContainsAny checks if a file contains any of the specified strings.
+func FileContainsAny(filename string, subslices [][]byte, fs afero.Fs) (bool, error) {
+	return afero.FileContainsAnyBytes(fs, filename, subslices)
+}
+
+// Exists checks if a file or directory exists.
+func Exists(path string, fs afero.Fs) (bool, error) {
+	return afero.Exists(fs, path)
+}
+
 // ListDirNames returns an array of directory names from an array of fileinfo
 // AppFs := afero.NewOsFs()
 // dir := filepath.Dir(".")
@@ -182,7 +229,7 @@ func ListDirNames(fd []os.FileInfo) []string {
 // AppFs := afero.NewOsFs()
 // dir := filepath.Dir(".")
 // dirInfo, _ := afero.ReadDir(AppFs, dir)
-// ListFiles(dirInfo)
+// ListDirNames(dirInfo)
 func ListFiles(fd []os.FileInfo) []string {
 	files := []string{}
 	for _, pFile := range fd {
