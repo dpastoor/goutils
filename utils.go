@@ -206,7 +206,7 @@ func FileContainsAny(filename string, subslices [][]byte, fs afero.Fs) (bool, er
 }
 
 // Exists checks if a file or directory exists.
-func Exists(path string, fs afero.Fs) (bool, error) {
+func Exists(fs afero.Fs, path string) (bool, error) {
 	return afero.Exists(fs, path)
 }
 
