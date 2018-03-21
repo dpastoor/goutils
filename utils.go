@@ -196,12 +196,12 @@ func IsEmpty(fs afero.Fs, path string) (bool, error) {
 }
 
 // FileContains checks if a file contains a specified string.
-func FileContains(filename string, subslice []byte, fs afero.Fs) (bool, error) {
+func FileContains(fs afero.Fs, filename string, subslice []byte) (bool, error) {
 	return afero.FileContainsBytes(fs, filename, subslice)
 }
 
 // FileContainsAny checks if a file contains any of the specified strings.
-func FileContainsAny(filename string, subslices [][]byte, fs afero.Fs) (bool, error) {
+func FileContainsAny(fs afero.Fs, filename string, subslices [][]byte) (bool, error) {
 	return afero.FileContainsAnyBytes(fs, filename, subslices)
 }
 
